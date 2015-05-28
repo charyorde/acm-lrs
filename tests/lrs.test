@@ -1,0 +1,24 @@
+<?php
+
+class LrsTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'lrs Integration',
+      'description' => 'Performs all possible test for lrs Integration',
+      'group' => 'Acadaman'
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('drupal_queue');
+    drupal_queue_include();
+  }
+
+  function testDrupalQueue() {
+  
+  }
+
+  function testLrsStatement() {
+  }
+}

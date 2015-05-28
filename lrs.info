@@ -1,0 +1,5 @@
+name = lrs
+description = LRS Integration
+package = Acadaman
+core = 6.x
+version = "6.x"

@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * Implementation of hook_init()
+ */
+function lrs_init() {
+  $path = drupal_get_path('module', 'lrs');
+  if(module_exists('trigger')) {
+    include_once $path . '/includes/lrs.actions.inc';
+  }
+}
+
+/**
+ * Implements hook_menu()
+ */
+function lrs_menu() {
+  $items['admin/settings/lrs'] = array(
+    'title' => 'LRS Integration',
+    'description' => t('Configure Acadaman LRS'),
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('lrs_settings'),
+    'file' => 'includes/lrs.admin.inc',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer lrs Integration')
+  );
+  $items['admin/settings/lrs/settings'] = array(
+    'title' => 'Configuration',
+    'type' => MENU_DEFAULT_LOCAL_TASK
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_perm
+ */
+function lrs_perm() {
+  return array(
+    'administer lrs Integration'
+  );
+}
+
+/**
+ * Call a method on a given service.
+ *
+ * This function is a wrapper for _lrs_tincanapi_call
+ */
+function lrs_tincanapi_call($method, $params) {
+  include_once './'. drupal_get_path('module', 'lrs') . '/includes/lrs.api.inc';
+  return _lrs_tincanapi_call($method, $params);
+}
